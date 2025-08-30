@@ -11,7 +11,7 @@ export default function Chatbot() {
     if (!prompt.trim()) return;
     setLoading(true);
     try {
-      const res = await fetch("https://genai-x782.onrender.com/api/ai/generate", {
+      const res = await fetch("https://genai-x782.onrender.com/ai/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, language }),
