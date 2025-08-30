@@ -61,9 +61,9 @@ export default function Chatbot() {
         </button>
       </div>
 
-      {/* ✅ Main Workspace */}
+  
       <div className="flex flex-1 gap-4">
-        {/* Left - Code */}
+
         <textarea
           className="w-1/2 p-3 bg-gray-800 text-green-400 rounded-lg font-mono text-sm"
           value={code}
