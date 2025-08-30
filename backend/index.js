@@ -1,32 +1,48 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-import aiRoutes from "./routes/ai.js";
-
-dotenv.config();
+import fetch from "node-fetch";
 
 const app = express();
 
-// CORS setup (apne frontend ka URL yahan daalna)
-app.use(cors({
-  origin: ["https://genai-kappa.vercel.app"], 
-  methods: ["GET", "POST"],
-  credentials: true
-}));
-
+// Middleware
 app.use(express.json());
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("✅ API is running...");
+// ✅ CORS Fix
+app.use(
+  cors({
+    origin: "*", // test ke liye sab allowed, baad me apna frontend domain likh dena
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Route: Gemini API
+app.post("/api/generate", async (req, res) => {
+  try {
+    const { prompt, language } = req.body;
+
+    // Gemini API request
+    const response = await fetch(
+      https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY},
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: ${prompt} in ${language} }] }],
+        }),
+      }
+    );
+
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    console.error("Error from Gemini API:", err);
+    res.status(500).json({ error: "Something went wrong on the server" });
+  }
 });
 
-// Routes
-app.use("/api/ai", aiRoutes);
-
-// PORT setup
+// Server Start
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log("🔑 Gemini API Key:", process.env.GEMINI_API_KEY ? "Loaded" : "Missing!");
-});
+app.listen(PORT, () =>
+  console.log(🚀 Server running on port ${PORT} | Gemini API loaded ✅)
+);
