@@ -11,7 +11,7 @@ export default function Chatbot() {
     if (!prompt.trim()) return;
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/ai/generate", {
+      const res = await fetch("https://genai-rlwq.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, language }),
