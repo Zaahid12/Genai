@@ -9,7 +9,7 @@ const app = express();
 
 // CORS setup (apne frontend ka URL yahan daalna)
 app.use(cors({
-  origin: ["http://localhost:5173", "https://your-frontend.vercel.app"], 
+  origin: ["http://localhost:5173", "https://genai-1frontend.onrender.com/chatbot"], 
   methods: ["GET", "POST"],
   credentials: true
 }));
