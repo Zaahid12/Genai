@@ -9,7 +9,7 @@ const app = express();
 
 // CORS setup (apne frontend ka URL yahan daalna)
 app.use(cors({
-  origin: ["*"], 
+  origin: ["https://genai-kappa.vercel.app , http://localhost:5173/"], 
   methods: ["GET", "POST"],
   credentials: true
 }));
